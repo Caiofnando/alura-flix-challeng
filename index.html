@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alura Flix</title>
+  <style>
+    body {
+      font-family: 'Roboto Mono', monospace;
+      text-align: center;
+      background-image: url('https://img.freepik.com/fotos-gratis/fundo-de-textura-de-ardosia_24972-292.jpg?size=626&ext=jpg');
+      background-color: #000000;
+      background-size: cover;
+      background-position: center top;
+      background-repeat: no-repeat;
+    }
+
+    .container {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .page-title {
+      color: #ffffff;
+      margin: 0 0 5px;
+    }
+
+    .page-subtitle {
+      color: #ffffff;
+      margin-top: 5px;
+    }
+
+    .page-logo {
+      width: 200px;
+    }
+
+    .alura-logo {
+      width: 40px;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    .filme {
+      margin: 10px;
+      width: 200px;
+      display: inline-block;
+    }
+
+    .form-wrapper {
+      margin: 0 0 15px;
+    }
+
+    .form-wrapper input {
+      display: inline;
+      margin: 0 auto;
+      padding: 10px 15px;
+    }
+
+    .form-wrapper button {
+      border: 0;
+      color: #FFFAFA;
+      background: #DA1E26;
+      font-weight: bold;
+      padding: 15px 20px;
+      font-size: 16px;
+      border-radius: 4px;
+      margin-top: 20px;
+      cursor: pointer;
+      transition: .3s;
+    }
+
+    .form-wrapper button:hover {
+      opacity: .8;
+    }
+
+    .nomeFilme {
+      width: 200px;
+      color: #FFF;
+    }
+
+    .filme p {
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="page-title">Aluraflix Caio Fernando</h1>
+    <!-- Atualize o src da imagem para o caminho correto -->
+    <img src="image 1-2.png" class="page-logo" alt="Logo Alura Flix">
+    <p class="page-subtitle">
+      <big>Escolha ou adicione o seu filme favorito!</big>
+    </p>
+    <div class="form-wrapper">
+      <!-- Atualize o placeholder do input para instruir corretamente -->
+      <input type="text" id="imagemFilme" name="filme" placeholder="Insira endereço de imagem">
+      <input type="text" id="linkFilme" name="filme" placeholder="Insira endereço do link">
+      <input type="text" id="nomeFilme" name="filme" placeholder="Insira nome do filme">
+      <button onclick="adicionarFilme()">Adicionar Filme</button>
+    </div>
+  </div>
+  <div id="listaFilmes"></div>
+  <a href="https://alura.com.br/" target="_blank">
+    <img src="https://www.alura.com.br/assets/img/home/alura-logo.svg" alt="Logo Alura" class="alura-logo">
+  </a>
+
+  <script>
+    function adicionarFilme() {
+      var campoImagemFilme = document.querySelector('#imagemFilme');
+      var campoLinkFilme = document.querySelector('#linkFilme');
+      var campoNomeFilme = document.querySelector('#nomeFilme');
+
+      console.log("clicou");
+
+      var imagemFilme = campoImagemFilme.value;
+      var linkFilme = campoLinkFilme.value;
+      var nomeFilme = campoNomeFilme.value;
+
+      if (imagemFilme.endsWith('.jpg') || imagemFilme.endsWith(".png") || imagemFilme.endsWith(".jfif")) {
+        listarImagemFilmesNatela(imagemFilme, linkFilme, nomeFilme);
+      } else {
+        alert('Imagem inválida');
+      }
+
+      campoImagemFilme.value = "";
+      campoLinkFilme.value = "";
+      campoNomeFilme.value = "";
+
+      console.log(imagemFilme);
+      console.log(linkFilme);
+      console.log(nomeFilme);
+    }
+
+    function listarImagemFilmesNatela(imagemFilme, linkFilme, nomeFilme) {
+      var listaImagemFilmes = document.querySelector('#listaFilmes');
+      var elementoImagemFilme = "<div class='filme'><a href=" + linkFilme + " target=_blank><img src=" + imagemFilme + "><p>" + nomeFilme + "</p></div>";
+      listaImagemFilmes.innerHTML += elementoImagemFilme;
+    }
+
+    // Lista inicial de filmes (adicione aqui os filmes que já existem)
+    var filmesIniciais = [
+      {
+        imagem: 'https://m.media-amazon.com/images/M/MV5BYzIzYmJlYTYtNGNiYy00N2EwLTk4ZjItMGYyZTJiOTVkM2RlXkEyXkFqcGdeQXVyODY1NDk1NjE@._V1_UX182_CR0,0,182,268_AL_.jpg',
+        link: 'https://www.imdb.com/title/tt6966692/',
+        nome: 'Green Book'
+      },
+      {
+        imagem: 'https://m.media-amazon.com/images/M/MV5BYjc1Mjg5NjItY2I2MS00NDk3LWI5NGYtNzZjNTNiZmMwZTA3XkEyXkFqcGdeQXVyMjM4NTM5NDY@._V1_UX182_CR0,0,182,268_AL_.jpg',
+        link: 'https://www.imdb.com/title/tt10059518/',
+        nome: 'Fúria Incontrolável'
+      }
+      // Adicione mais filmes aqui
+    ];
+
+    // Função para renderizar os filmes iniciais
+    function renderizarFilmesIniciais() {
+      var listaImagemFilmes = document.querySelector('#listaFilmes');
+      filmesIniciais.forEach(filme => {
+        var elementoImagemFilme = "<div class='filme'><a href=" + filme.link + " target=_blank><img src=" + filme.imagem + "><p>" + filme.nome + "</p></div>";
+        listaImagemFilmes.innerHTML += elementoImagemFilme;
+      });
+    }
+
+    // Chama a função ao carregar a página
+    window.onload = renderizarFilmesIniciais;
+  </script>
+</body>
+</html>
